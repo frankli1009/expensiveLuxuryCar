@@ -10,6 +10,9 @@ myManufacturer.addEventListener("change", loadMyData, false);
 function loadMyData() {
     var manufacturerStored = myManufacturer.options[myManufacturer.selectedIndex].value;
     console.log(manufacturerStored);
+    if(manufacturerStored === null || manufacturerStored === "") {
+        return;
+    }
     
     var chartType = mySurvey.options[mySurvey.selectedIndex].value;
     
@@ -20,7 +23,7 @@ function loadMyData() {
     myRequest.onload = function() {
         if(myRequest.readyState === 4 && myRequest.status === 200) {
             var luxuryCars = JSON.parse(myRequest.responseText);
-            console.log(luxuryCars);
+            //console.log(luxuryCars);
             
             document.getElementById("manufacturerC").innerHTML = luxuryCars.data[manufacturerStored].manufacturer;
             
